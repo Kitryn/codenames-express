@@ -1,0 +1,60 @@
+html, body {
+  height: 100%;
+  background-color: darkseagreen;
+}
+
+body {
+  padding: 10px 10px;
+  font: 28px "Helvetica Nueue", "Lucida Grande", Arial, sans-serif;
+  font-weight: bold;
+}
+
+table tr td {
+  border: 2px solid black;
+}
+
+tr {
+  min-height: 20%;
+}
+
+td {
+  vertical-align: middle;
+  padding: 10px;
+  text-align: center;
+  width: 20%;
+  background-color: beige;
+  text-transform: uppercase;
+}
+
+div#answers {
+  display: none;
+}
+
+.red {
+  background-color: indianred;
+}
+
+.blue {
+  background-color: skyblue;
+}
+
+.bomb {
+  background-color: black;
+  color: white;
+}
+
+.black {
+  background-color: black;
+}
+
+.hover {
+  background-color: burlywood;
+}
+
+.grey {
+  background-color: darkgrey;
+}
+
+.center {
+  text-align: center;
+}
