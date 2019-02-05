@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const pub = __dirname + '/public';
 const wordList = fs.readFileSync("words.txt", "utf8").split("\n");
+const PORT = process.env.PORT || 3000;
 
 let game = {};
 
@@ -74,5 +75,5 @@ app.get('/newgame', function(req, res) {
     res.redirect('/');
 });
 
-app.listen(3000);
-console.log('Express started on port 3000');
+app.listen(PORT);
+console.log('Express started on port ' + PORT);
