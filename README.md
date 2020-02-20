@@ -9,4 +9,4 @@ Game board is presented on `/`.
 Spymasters navigate to `/spymaster` to view current board's answers.
 
 ### Starting a new game
-Anyone can navigate to `/newgame` to start a new game. Other windows must be refresed manually.
+Anyone can navigate to `/newgame` to start a new game. Other windows must be refreshed manually.
