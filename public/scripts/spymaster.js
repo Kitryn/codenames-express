@@ -3,22 +3,18 @@ function loadAnswers(elemId) {
     return text.split(",");
 }
 
-var redAnswers;
-var blueAnswers;
+var answers;
 var bomb;
 
 $(document).ready(function() {
-    redAnswers = loadAnswers("#answers.red");
-    blueAnswers = loadAnswers("#answers.blue");
+    answers = loadAnswers("#answers.answer");
     bomb = loadAnswers("#answers.bomb");
     
     $("td").each(function(i, elem) {
         var text = $(this).text();
         
-        if (redAnswers.indexOf(text) > -1) {
-            $(this).addClass("red");
-        } else if (blueAnswers.indexOf(text) > -1) {
-            $(this).addClass("blue");
+        if (answers.indexOf(text) > -1) {
+            $(this).addClass("answer");
         } else if (bomb.indexOf(text) > -1) {
             $(this).addClass("bomb");
         } else {

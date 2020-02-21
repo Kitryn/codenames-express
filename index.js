@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 
 const pub = __dirname + '/public';
-const wordList = fs.readFileSync("words.txt", "utf8").split("\n");
+const wordList = fs.readFileSync("words-duet.txt", "utf8").split("\n");
 const PORT = process.env.PORT || 3000;
 
 let game = {};
@@ -30,11 +30,13 @@ function randomFromList(list, n) {
 
 function newGame() {
     game = {};
-    game.player = Math.floor(Math.random() * 2);  // 0 for blue, 1 for red
+    // game.player = Math.floor(Math.random() * 2);  // 0 for blue, 1 for red
     game.wordList = randomFromList(wordList, 25);
     
-    let answers = randomFromList(game.wordList, 18);
-    game.answers = [answers.slice(0,8 + (1 - game.player)), answers.slice(8 + (1 - game.player), 17), answers.slice(17, 18)];
+    let answers = randomFromList(game.wordList, 20);
+    game.rawAnswers = answers.slice(0);
+    game.answers = [answers.slice(0, 9), answers.slice(6, 15), answers.slice(15, 18), answers.slice(17,20)];
+    // Index 0 = side A answers, 1 = side B answers, 2 = side A bombs, 3 = side B bombs
     
     let counter = 0;
     game.gameBoard = [];
@@ -53,13 +55,30 @@ newGame();
 app.get('/', function(req, res) {
     res.render('board', {
         gameBoard: game.gameBoard,
-        answersBlue: game.answers[0],
-        answersRed: game.answers[1],
-        bomb: game.answers[2],
-        player: game.player
+        answers: game.rawAnswers.slice(0, 15),
+        bomb: game.rawAnswers.slice(15,20)
     });
 });
 
+app.get('/a', function(req, res) {
+    res.render('spymaster', {
+        gameBoard: game.gameBoard,
+        answers: game.answers[0],
+        bomb: game.answers[2],
+        player: 'a'
+    });
+});
+
+app.get('/b', function(req, res) {
+    res.render('spymaster', {
+        gameBoard: game.gameBoard,
+        answers: game.answers[1],
+        bomb: game.answers[3],
+        player: 'b'
+    });
+});
+
+/*
 app.get('/spymaster', function(req, res) {
     res.render('spymaster', {
         gameBoard: game.gameBoard,
@@ -69,7 +88,7 @@ app.get('/spymaster', function(req, res) {
         player: game.player
     });
 });
-
+*/
 app.get('/newgame', function(req, res) {
     newGame();
     res.redirect('/');

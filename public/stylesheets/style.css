@@ -1,6 +1,6 @@
 html, body {
   height: 100%;
-  background-color: darkseagreen;
+  background-color: floralwhite;
 }
 
 body {
@@ -45,6 +45,10 @@ div#answers {
 
 .black {
   background-color: black;
+}
+
+.answer {
+    background-color: darkseagreen;
 }
 
 .hover {

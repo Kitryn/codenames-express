@@ -3,23 +3,19 @@ function loadAnswers(elemId) {
     return text.split(",");
 }
 
-var redAnswers;
-var blueAnswers;
+var answers;
 var bomb;
-var redWordsLeft;
-var blueWordsLeft;
+var wordsLeft;
 var gameEnded = false;
 
 $(document).ready(function() {
-    redAnswers = loadAnswers("#answers.red");
-    blueAnswers = loadAnswers("#answers.blue");
+    answers = loadAnswers("#answers.answer");
     bomb = loadAnswers("#answers.bomb");
     
-    redWordsLeft = redAnswers.length;
-    blueWordsLeft = blueAnswers.length;
+    wordsLeft = answers.length;
     
     $("td").click(function() {
-        if ($(this).hasClass("red") || $(this).hasClass("blue") || $(this).hasClass("bomb") || $(this).hasClass("grey")) {
+        if ($(this).hasClass("answer") || $(this).hasClass("bomb") || $(this).hasClass("grey")) {
             return;
         }
         
@@ -27,7 +23,6 @@ $(document).ready(function() {
             return;
         }
         
-        $("#status").text("").removeClass("blue").removeClass("red");
         
         if ($(this).hasClass("hover")) {
             $(this).removeClass("hover");
@@ -35,28 +30,21 @@ $(document).ready(function() {
         
         var text = $(this).text();
         
-        if (redAnswers.indexOf(text) > -1) {
-            $(this).addClass("red");
-            redWordsLeft--;
-        } else if (blueAnswers.indexOf(text) > -1) {
-            $(this).addClass("blue");
-            blueWordsLeft--;
+        if (answers.indexOf(text) > -1) {
+            $(this).addClass("answer");
+            wordsLeft--;
         } else if (bomb.indexOf(text) > -1) {
             $(this).addClass("bomb");
             $("body").addClass("black");
-            $("#status").text("GAME OVER").removeClass("blue").removeClass("red").addClass("bomb");
+            $("#status").text("GAME OVER").removeClass("answer").addClass("bomb");
             gameEnded = true;
         } else {
             $(this).addClass("grey");
         }
         
-        if (redWordsLeft <= 0) {
-            $("body").addClass("red");
-            $("#status").text("Red wins!").removeClass("blue").addClass("red");
-            gameEnded = true;
-        } else if (blueWordsLeft <= 0) {
-            $("body").addClass("blue");
-            $("#status").text("Blue wins!").removeClass("red").addClass("blue");
+        if (wordsLeft <= 0) {
+            $("body").addClass("answer");
+            $("#status").text("You win!").addClass("red");
             gameEnded = true;
         }
     });
@@ -64,7 +52,7 @@ $(document).ready(function() {
     $("td").hover(
         function() {
             // handlerIn
-            if ($(this).hasClass("red") || $(this).hasClass("blue") || $(this).hasClass("bomb") || $(this).hasClass("grey")) {
+            if ($(this).hasClass("answer") || $(this).hasClass("bomb") || $(this).hasClass("grey")) {
                 return;
             }
             

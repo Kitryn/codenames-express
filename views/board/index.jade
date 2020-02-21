@@ -7,11 +7,7 @@ block content
         tr
           each column in row
             td(id=column)= column
-  if player == 0
-    div#status.blue.center Blue starts first!
-  else
-    div#status.red.center Red starts first!
+  div#status.center Codenames Duet
   script(type="text/javascript", src="/scripts/board.js")
-  div#answers.blue= answersBlue
-  div#answers.red= answersRed
+  div#answers.answer= answers
   div#answers.bomb= bomb
